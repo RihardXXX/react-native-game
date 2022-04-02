@@ -1,9 +1,10 @@
-import { View, TextInput } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import { pink } from "../styles/color";
 
 const GameStartScreen = () => {
     return (
-        <View>
+        <View style={styles.inputContainer}>
             <TextInput />
             <PrimaryButton>
                 start
@@ -19,3 +20,14 @@ const GameStartScreen = () => {
 }
 
 export default GameStartScreen;
+
+const styles = StyleSheet.create({
+    inputContainer: {
+        marginTop: 80,
+        marginHorizontal: 20,
+        padding: 10,
+        backgroundColor: pink,
+        borderRadius: 8,
+    }
+})
+
