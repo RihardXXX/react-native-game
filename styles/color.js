@@ -5,7 +5,7 @@ const redVery = '#EF3124';
 const red = '#F15045';
 const pink = '#FF5C5C';
 const green = '#2FC26E';
-const lightGray = '	#B6BCC3';
+const lightGray = '#B6BCC3';
 
 export {
     black,
