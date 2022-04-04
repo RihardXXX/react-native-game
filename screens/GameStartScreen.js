@@ -3,7 +3,8 @@ import { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import { pink, black } from "../styles/color";
 
-const GameStartScreen = () => {
+
+const GameStartScreen = ({selectedNumberUser}) => {
     const [enteredNumber, setEnteredNumber] = useState('');
 
     const resetNumber = () => {
@@ -29,7 +30,7 @@ const GameStartScreen = () => {
             return;
         }
 
-        console.log('valid number');
+        selectedNumberUser(num);
     };
 
     return (
