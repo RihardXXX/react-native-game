@@ -1,5 +1,5 @@
 import { Text, StyleSheet } from "react-native";
-import { red, pink } from '../styles/color';
+import { red, pink } from '../../styles/color';
 
 const Title = ({children}) => {
     return (
