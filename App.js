@@ -5,6 +5,8 @@ import GameStartScreen from './screens/GameStartScreen';
 import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import { lightGray, darkGray, whiteDark, red, pink } from './styles/color';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -12,6 +14,15 @@ export default function App() {
 
   const selectedNumberUser = (numberSelected) => {
     setUserNumber(numberSelected);
+  }
+
+  let [fontsLoaded] = useFonts({
+    'open-sans-reqular': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
+  })
+
+  if (!fontsLoaded) {
+    return <AppLoading />
   }
 
   const changeGameOver = () => setGameOver(true);

@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import InstructionsText from "../components/ui/InstructionsText";
+import { pink, whiteDark } from '../styles/color';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -62,14 +65,24 @@ const GameScreen = ({userNumber, changeGameOver}) => {
                 { currentGuess }
             </NumberContainer>
             <View>
-                <Text>Higher or Lower</Text>
-                <View>
-                    <PrimaryButton onPress={() => nextGuessHandler('lower')}>
-                        -
-                    </PrimaryButton>
-                    <PrimaryButton onPress={() => nextGuessHandler('greater')}>
-                        +
-                    </PrimaryButton>
+                <InstructionsText style={{color: pink}}>Please click High or Lower</InstructionsText>
+                <View style={styles.buttonsBlock}>
+                    <View style={styles.button}>
+                        <PrimaryButton onPress={() => nextGuessHandler('lower')}>
+                            <Ionicons 
+                                name="remove-circle-outline" 
+                                size={32} color={whiteDark} 
+                            />
+                        </PrimaryButton>   
+                    </View>
+                    <View style={styles.button}>
+                        <PrimaryButton onPress={() => nextGuessHandler('greater')}>
+                            <Ionicons 
+                                name="add-circle-outline" 
+                                size={32} color={whiteDark} 
+                            />
+                        </PrimaryButton>
+                    </View>
                 </View>
                 {/* +- */}
             </View>
@@ -85,5 +98,13 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 30,
         marginTop: 20
+    },
+    buttonsBlock: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    button: {
+        flex: 1
     }
 })

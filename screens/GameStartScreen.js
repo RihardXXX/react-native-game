@@ -1,7 +1,11 @@
 import { View, TextInput, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
+import Card from "../components/ui/Card";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Title from "../components/ui/Title";
+import InstructionsText from "../components/ui/InstructionsText";
 import { pink, black } from "../styles/color";
+
 
 
 const GameStartScreen = ({selectedNumberUser}) => {
@@ -34,32 +38,40 @@ const GameStartScreen = ({selectedNumberUser}) => {
     };
 
     return (
-        <View style={styles.inputContainer}>
-            <TextInput
-                style={styles.numberInput}
-                maxLength={2}
-                keyboardType="number-pad"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={e => setEnteredNumber(e)}
-                value={enteredNumber}
-            />
-            <View style={styles.buttonsBlock}>
-                <View style={styles.button}>
-                    <PrimaryButton 
-                        onPress={resetNumber}
-                    >
-                        reset
-                    </PrimaryButton>
+        <View style={styles.rootContainer}>
+            <Title>
+                Guess Number
+            </Title>
+            <Card>
+                <InstructionsText>
+                    enter guess number
+                </InstructionsText>
+                <TextInput
+                        style={styles.numberInput}
+                        maxLength={2}
+                        keyboardType="number-pad"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        onChangeText={e => setEnteredNumber(e)}
+                        value={enteredNumber}
+                    />
+                <View style={styles.buttonsBlock}>
+                    <View style={styles.button}>
+                        <PrimaryButton 
+                            onPress={resetNumber}
+                        >
+                            reset
+                        </PrimaryButton>
+                    </View>
+                    <View style={styles.button}>
+                        <PrimaryButton
+                            onPress={confirmNumber}
+                        >
+                            confirm
+                        </PrimaryButton>
+                    </View>
                 </View>
-                <View style={styles.button}>
-                    <PrimaryButton
-                        onPress={confirmNumber}
-                    >
-                        confirm
-                    </PrimaryButton>
-                </View>
-            </View>
+            </Card>
         </View>
     );
 }
@@ -67,21 +79,17 @@ const GameStartScreen = ({selectedNumberUser}) => {
 export default GameStartScreen;
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 80,
-        marginHorizontal: 20,
-        padding: 10,
-        backgroundColor: pink,
-        borderRadius: 8,
+    rootContainer: {
+        flex: 1,
+        paddingVertical: 80,
+        paddingHorizontal: 50,
+        textAlign: 'center',
     },
     numberInput: {
         height: 50,
         width: 50,
         padding: 3,
-        marginVertical: 10,
+        marginVertical: 5,
         borderBottomColor: black,
         borderBottomWidth: 2,
         fontSize: 32,
