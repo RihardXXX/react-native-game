@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, FlatList } from "react-native";
 import { useState, useEffect } from "react";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
@@ -20,11 +20,13 @@ function generateRandomBetween(min, max, exclude) {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const GameScreen = ({userNumber, changeGameOver}) => {
+const GameScreen = ({userNumber, changeGameOver, setGuessRounds}) => {
     const initialNumer = generateRandomBetween(1, 100, userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialNumer);
+    const [guessList, setGuessList] = useState([initialNumer]);
 
     const nextGuessHandler = (direction) => { // higher or lower
+        setGuessRounds(num => num + 1);
         if (
             (direction === 'lower' && currentGuess < userNumber) || 
             (direction === 'greater' && currentGuess > userNumber)
@@ -50,6 +52,7 @@ const GameScreen = ({userNumber, changeGameOver}) => {
         const newRndGuess = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
 
         setCurrentGuess(newRndGuess);
+        setGuessList(guessList => [newRndGuess, ...guessList]);
     }
 
     useEffect(() => {
@@ -57,6 +60,11 @@ const GameScreen = ({userNumber, changeGameOver}) => {
             changeGameOver(true);
         }
     }, [userNumber, currentGuess, changeGameOver]);
+
+    useEffect(() => {
+        minBoundary = 1;
+        maxBoundary = 100;
+    }, []);
 
     return (
         <View style={styles.screen}>
@@ -84,9 +92,12 @@ const GameScreen = ({userNumber, changeGameOver}) => {
                         </PrimaryButton>
                     </View>
                 </View>
-                {/* +- */}
             </View>
-            {/* <View>Log rounds</View> */}
+            <FlatList 
+                data={guessList}
+                renderItem={({item}) => <Text>{item}</Text>}
+                keyExtractor={item => item}
+            />
         </View>
     )
 };
