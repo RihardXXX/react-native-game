@@ -38,18 +38,18 @@ export default function App() {
 
   if (userNumber) {
     screen = <GameScreen 
-        userNumber={userNumber} 
-        changeGameOver={changeGameOver} 
-        setGuessRounds={setGuessRounds}
-      />;
+              userNumber={userNumber} 
+              changeGameOver={changeGameOver} 
+              setGuessRounds={setGuessRounds}
+            />;
   }
 
   if (gameOver) {
     screen = <GameOverScreen 
-      userNumber={userNumber} 
-      guesRounds={guesRounds} 
-      onStartGame={onStartGame}
-    />
+                userNumber={userNumber} 
+                guesRounds={guesRounds} 
+                onStartGame={onStartGame}
+              />
   }
 
   return (

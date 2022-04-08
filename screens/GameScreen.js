@@ -6,6 +6,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import InstructionsText from "../components/ui/InstructionsText";
 import { pink, whiteDark } from '../styles/color';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import GuessLogger from "../components/ui/GuessLogger";
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -93,11 +94,13 @@ const GameScreen = ({userNumber, changeGameOver, setGuessRounds}) => {
                     </View>
                 </View>
             </View>
-            <FlatList 
-                data={guessList}
-                renderItem={({item}) => <Text>{item}</Text>}
-                keyExtractor={item => item}
-            />
+            <View style={styles.listContainer}>
+                <FlatList 
+                    data={guessList}
+                    renderItem={({item, index}) => <GuessLogger index={index + 1} guessNum={item} />}
+                    keyExtractor={item => `${item} h ${Math.random()}`}
+                />
+            </View>
         </View>
     )
 };
@@ -117,5 +120,9 @@ const styles = StyleSheet.create({
     },
     button: {
         flex: 1
+    },
+    listContainer: {
+        flex: 1,
+        marginTop: 30
     }
 })
