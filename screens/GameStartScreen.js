@@ -1,4 +1,4 @@
-import { View, TextInput, StyleSheet, Alert } from "react-native";
+import { View, TextInput, StyleSheet, Alert, Dimensions, ScrollView, KeyboardAvoidingView } from "react-native";
 import { useState } from "react";
 import Card from "../components/ui/Card";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -38,58 +38,71 @@ const GameStartScreen = ({selectedNumberUser}) => {
     };
 
     return (
-        <View style={styles.rootContainer}>
-            <Title>
-                Guess Number
-            </Title>
-            <Card>
-                <InstructionsText>
-                    enter guess number
-                </InstructionsText>
-                <TextInput
-                        style={styles.numberInput}
-                        maxLength={2}
-                        keyboardType="number-pad"
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        onChangeText={e => setEnteredNumber(e)}
-                        value={enteredNumber}
-                    />
-                <View style={styles.buttonsBlock}>
-                    <View style={styles.button}>
-                        <PrimaryButton 
-                            onPress={resetNumber}
-                        >
-                            reset
-                        </PrimaryButton>
-                    </View>
-                    <View style={styles.button}>
-                        <PrimaryButton
-                            onPress={confirmNumber}
-                        >
-                            confirm
-                        </PrimaryButton>
-                    </View>
+        <ScrollView style={styles.rootContainer}>
+            <KeyboardAvoidingView
+                behavior="position"
+                style={styles.rootContainer}
+            >
+                <View style={styles.root}>
+                    <Title>
+                        Guess Number
+                    </Title>
+                    <Card>
+                        <InstructionsText style={{marginBottom: 0}}>
+                            enter guess number
+                        </InstructionsText>
+                        <TextInput
+                                style={styles.numberInput}
+                                maxLength={2}
+                                keyboardType="number-pad"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                onChangeText={e => setEnteredNumber(e)}
+                                value={enteredNumber}
+                            />
+                        <View style={styles.buttonsBlock}>
+                            <View style={styles.button}>
+                                <PrimaryButton 
+                                    onPress={resetNumber}
+                                >
+                                    reset
+                                </PrimaryButton>
+                            </View>
+                            <View style={styles.button}>
+                                <PrimaryButton
+                                    onPress={confirmNumber}
+                                >
+                                    confirm
+                                </PrimaryButton>
+                            </View>
+                        </View>
+                    </Card>
                 </View>
-            </Card>
-        </View>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 }
 
 export default GameStartScreen;
 
+const devicesWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     rootContainer: {
         flex: 1,
+    },
+    root: {
+        flex: 1,
         paddingVertical: 80,
-        paddingHorizontal: 50,
+        // // paddingHorizontal: 50,
         textAlign: 'center',
+        alignItems: 'center'
     },
     numberInput: {
         height: 50,
         width: 50,
         padding: 3,
-        marginVertical: 5,
+        marginVertical: devicesWidth > 380 ? 15 : 10,
         borderBottomColor: black,
         borderBottomWidth: 2,
         fontSize: 32,

@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Dimensions } from "react-native";
 import { whiteDark } from "../../styles/color";
 
 const InstructionsText = ({children, style}) => {
@@ -11,6 +11,8 @@ const InstructionsText = ({children, style}) => {
 
 export default InstructionsText;
 
+const divecesWidth = Dimensions.get('window').width;
+
 
 const styles = StyleSheet.create({
     textRoot: {
@@ -18,6 +20,6 @@ const styles = StyleSheet.create({
         color: whiteDark,
         textAlign: 'center',
         marginVertical: 10,
-        fontSize: 18
+        fontSize: divecesWidth > 380 ? 20 : 18
     }
 })

@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Alert, FlatList } from "react-native";
+import { Text, View, StyleSheet, Alert, FlatList, useWindowDimensions } from "react-native";
 import { useState, useEffect } from "react";
 import Title from "../components/ui/Title";
 import NumberContainer from "../components/game/NumberContainer";
@@ -66,6 +66,10 @@ const GameScreen = ({userNumber, changeGameOver, setGuessRounds}) => {
         minBoundary = 1;
         maxBoundary = 100;
     }, []);
+
+    const { height } = useWindowDimensions();
+
+    
 
     return (
         <View style={styles.screen}>

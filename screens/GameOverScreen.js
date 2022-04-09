@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Title from '../components/ui/Title';
 import { pink, whiteDark } from '../styles/color';
@@ -28,6 +28,8 @@ const GameOverScreen = ({userNumber, guesRounds, onStartGame}) => {
 
 export default GameOverScreen;
 
+const devicesWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     rootContainer: {
         flex: 1,
@@ -37,9 +39,9 @@ const styles = StyleSheet.create({
     },
     image: {
         marginTop: 20,
-        height: 300,
-        width: 300,
-        borderRadius: 150,
+        height: devicesWidth > 380 ? 300 : 200,
+        width: devicesWidth > 380 ? 300 : 200,
+        borderRadius: devicesWidth > 380 ? 150 : 100,
         borderWidth: 2,
         borderColor: 'black'
     },
